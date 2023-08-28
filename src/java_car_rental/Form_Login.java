@@ -15,6 +15,16 @@ public class Form_Login extends javax.swing.JFrame {
      */
     public Form_Login() {
         initComponents();
+        
+        //center the form
+        this.setLocationRelativeTo(null) ;
+        
+        //display image on the jlabels
+        //jLabel_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/ima.png")));
+        //jLabel_user.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/username.png")));
+        //jLabel_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/password-512.png")));
+        
+        //les images ne marche pas !!!!!
     }
 //
     /**
@@ -51,7 +61,6 @@ public class Form_Login extends javax.swing.JFrame {
         jLabel_title.setText("Login");
 
         jLabel_user.setBackground(new java.awt.Color(255, 51, 51));
-        jLabel_user.setText("X");
         jLabel_user.setOpaque(true);
 
         jTextField_username.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -62,7 +71,6 @@ public class Form_Login extends javax.swing.JFrame {
         });
 
         jLabel_pass.setBackground(new java.awt.Color(255, 51, 51));
-        jLabel_pass.setText("X");
         jLabel_pass.setOpaque(true);
 
         jCheckBox_password.setText("Show Password");
@@ -94,18 +102,18 @@ public class Form_Login extends javax.swing.JFrame {
                             .addComponent(jLabel_title, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel_user, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField_username, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                                            .addComponent(jLabel_user, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBox_password)
-                                            .addComponent(jPasswordField1)))
-                                    .addComponent(jButton_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addComponent(jTextField_username, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jCheckBox_password)
+                                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                         .addContainerGap(51, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(

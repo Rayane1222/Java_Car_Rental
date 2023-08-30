@@ -7,6 +7,13 @@ package java_car_rental;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java_car_rental.classes.DB;
+import java.sql.SQLException;
+
+
+
 
 /**
  *
@@ -209,7 +216,54 @@ public class Form_Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_loginActionPerformed
-        // TODO add your handling code here:
+        
+        String username = jTextField_username.getText();
+        String password = String.valueOf(jPasswordField1.getPassword());
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        String query = "SELECT * FROM `users` WHERE `username` = ? AND password = ?";
+        
+        if(username.trim().toLowerCase().equals("username") || password.trim().toLowerCase().equals("password") )
+        {
+            System.out.println("Enter a Valid Username & Password");
+        }
+        else
+        {
+            try{
+                    
+                    ps = DB.getConnection().prepareStatement(query);
+                    ps.setString(1,username);
+                    ps.setString(2,password);
+                    rs = ps.executeQuery();
+
+                        if(rs.next())
+                        {
+                            //System.out.println("Login");
+                            //display dashboard form
+                            Form_Dashboard frm_dsh = new Form_Dashboard();
+                            frm_dsh.setVisible(true);
+                            //display the username
+                            Form_Dashboard.jLabel_username.setText(rs.getString("username"));
+                            //hide the login form
+                            this.dispose();
+                        }
+                        else{
+                            System.out.println("Invalid Username or Password");
+                        }
+
+            }
+            catch(SQLException ex){
+                 System.out.println(ex.getMessage());
+                        
+            }
+            
+        }
+        
+        
+        
+        
     }//GEN-LAST:event_jButton_loginActionPerformed
 
     private void jTextField_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_usernameActionPerformed

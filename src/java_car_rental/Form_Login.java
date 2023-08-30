@@ -4,6 +4,10 @@
  */
 package java_car_rental;
 
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+
 /**
  *
  * @author mac
@@ -25,6 +29,10 @@ public class Form_Login extends javax.swing.JFrame {
         //jLabel_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/password-512.png")));
         
         //les images ne marche pas !!!!!
+        
+        //create border 
+        Border title_border = BorderFactory.createMatteBorder(0,0,3,0,Color.yellow);
+        jLabel_title.setBorder(title_border);
     }
 //
     /**
@@ -64,6 +72,16 @@ public class Form_Login extends javax.swing.JFrame {
         jLabel_user.setOpaque(true);
 
         jTextField_username.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jTextField_username.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField_username.setText("username");
+        jTextField_username.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField_usernameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField_usernameFocusLost(evt);
+            }
+        });
         jTextField_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_usernameActionPerformed(evt);
@@ -74,6 +92,11 @@ public class Form_Login extends javax.swing.JFrame {
         jLabel_pass.setOpaque(true);
 
         jCheckBox_password.setText("Show Password");
+        jCheckBox_password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox_passwordActionPerformed(evt);
+            }
+        });
 
         jButton_login.setText("Login");
         jButton_login.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +108,22 @@ public class Form_Login extends javax.swing.JFrame {
         jLabel_close.setFont(new java.awt.Font("Verdana", 0, 48)); // NOI18N
         jLabel_close.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_close.setText("X");
+        jLabel_close.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_closeMouseClicked(evt);
+            }
+        });
+
+        jPasswordField1.setForeground(new java.awt.Color(102, 102, 102));
+        jPasswordField1.setText("password");
+        jPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPasswordField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPasswordField1FocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -124,13 +163,13 @@ public class Form_Login extends javax.swing.JFrame {
                 .addGap(64, 64, 64)
                 .addComponent(jLabel_title)
                 .addGap(49, 49, 49)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_user, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel_user, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(jTextField_username))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(jPasswordField1))
                 .addGap(19, 19, 19)
                 .addComponent(jCheckBox_password)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -176,6 +215,68 @@ public class Form_Login extends javax.swing.JFrame {
     private void jTextField_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_usernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_usernameActionPerformed
+
+    private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
+        // close the form when clicked
+        System.exit(0);
+        
+    }//GEN-LAST:event_jLabel_closeMouseClicked
+
+    private void jTextField_usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_usernameFocusGained
+        // clear text if text = 'username'
+        if(jTextField_username.getText().trim().toLowerCase ().equals("username"))
+        {
+            jTextField_username.setText("");
+            jTextField_username.setForeground(Color.black);
+        }
+        
+    }//GEN-LAST:event_jTextField_usernameFocusGained
+
+    private void jTextField_usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_usernameFocusLost
+        // TODO add your handling code here:
+        if(jTextField_username.getText().trim().toLowerCase ().equals("username") || 
+                jTextField_username.getText().trim().toLowerCase ().equals("") )
+        {
+            jTextField_username.setText("username");
+            jTextField_username.setForeground(new Color(153,153,153));
+        }
+        
+    }//GEN-LAST:event_jTextField_usernameFocusLost
+
+    private void jPasswordField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusGained
+        // clear text if text = 'password'
+        String password = String.valueOf(jPasswordField1.getPassword());//get password
+        
+        if(password.trim().toLowerCase ().equals("password"))
+        {
+            jPasswordField1.setText("");
+            jPasswordField1.setForeground(Color.black);
+        } 
+    }//GEN-LAST:event_jPasswordField1FocusGained
+
+    private void jPasswordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusLost
+        // TODO add your handling code here:
+         String password = String.valueOf(jPasswordField1.getPassword()); //get password
+        if(password.trim().toLowerCase ().equals("password") || 
+                password.trim().toLowerCase ().equals("") )
+        {
+            jPasswordField1.setText("password");
+            jPasswordField1.setForeground(new Color(153,153,153));
+        }
+        
+    }//GEN-LAST:event_jPasswordField1FocusLost
+
+    private void jCheckBox_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_passwordActionPerformed
+        // Show and hide password 
+        if(jCheckBox_password.isSelected())
+        {
+            jPasswordField1.setEchoChar((char)0);
+        }
+        else
+        {
+            jPasswordField1.setEchoChar('*');
+        }
+    }//GEN-LAST:event_jCheckBox_passwordActionPerformed
 
     /**
      * @param args the command line arguments

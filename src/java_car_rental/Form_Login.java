@@ -99,6 +99,7 @@ public class Form_Login extends javax.swing.JFrame {
         jLabel_pass.setOpaque(true);
 
         jCheckBox_password.setText("Show Password");
+        jCheckBox_password.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCheckBox_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox_passwordActionPerformed(evt);
@@ -106,6 +107,7 @@ public class Form_Login extends javax.swing.JFrame {
         });
 
         jButton_login.setText("Login");
+        jButton_login.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_loginActionPerformed(evt);
@@ -115,6 +117,7 @@ public class Form_Login extends javax.swing.JFrame {
         jLabel_close.setFont(new java.awt.Font("Verdana", 0, 48)); // NOI18N
         jLabel_close.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_close.setText("X");
+        jLabel_close.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel_close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel_closeMouseClicked(evt);

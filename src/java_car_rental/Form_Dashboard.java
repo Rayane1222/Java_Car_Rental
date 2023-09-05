@@ -54,8 +54,8 @@ public final class Form_Dashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel_Cars = new javax.swing.JLabel();
+        jLabel_Location = new javax.swing.JLabel();
         jLabel_Brand = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -89,13 +89,25 @@ public final class Form_Dashboard extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 255));
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Menu Item 1");
+        jLabel_Cars.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
+        jLabel_Cars.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Cars.setText("Car");
+        jLabel_Cars.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_Cars.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_CarsMouseClicked(evt);
+            }
+        });
 
-        jLabel2.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Menu Item 1");
+        jLabel_Location.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
+        jLabel_Location.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Location.setText("Location");
+        jLabel_Location.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_Location.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_LocationMouseClicked(evt);
+            }
+        });
 
         jLabel_Brand.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
         jLabel_Brand.setForeground(new java.awt.Color(255, 255, 255));
@@ -122,9 +134,9 @@ public final class Form_Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_Cars, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel_Location, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_Brand, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
@@ -136,9 +148,9 @@ public final class Form_Dashboard extends javax.swing.JFrame {
                 .addGap(145, 145, 145)
                 .addComponent(jLabel_Brand, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel_Cars, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel_Location, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -427,6 +439,18 @@ public final class Form_Dashboard extends javax.swing.JFrame {
          frm_brd.setVisible(true);
     }//GEN-LAST:event_jLabel_BrandMouseClicked
 
+    private void jLabel_CarsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_CarsMouseClicked
+        // open the Cars form
+        Form_Cars frm_crs = new Form_Cars();
+         frm_crs.setVisible(true);
+    }//GEN-LAST:event_jLabel_CarsMouseClicked
+
+    private void jLabel_LocationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_LocationMouseClicked
+        // open the Location form
+        Form_Locations frm_brd = new Form_Locations();
+         frm_brd.setVisible(true);
+    }//GEN-LAST:event_jLabel_LocationMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -463,14 +487,14 @@ public final class Form_Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel_Brand;
+    private javax.swing.JLabel jLabel_Cars;
+    private javax.swing.JLabel jLabel_Location;
     private javax.swing.JLabel jLabel_booked_Logo;
     private javax.swing.JLabel jLabel_booked_count;
     private javax.swing.JLabel jLabel_cars_Logo;

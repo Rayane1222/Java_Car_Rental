@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 
 
@@ -73,9 +75,11 @@ public class brand_Cls {
             ps.setBytes(2, _logo);
         
             if(ps.executeUpdate() != 0 ){
-                System.out.println("Brand Added");
+                JOptionPane.showMessageDialog(null , "The New Brand Has Been Added","ADD Brand ",1);
+               // System.out.println("Locations Added");
             }else{
-                 System.out.println("Brand Not Added");
+                JOptionPane.showMessageDialog(null , "Brand Not Added","ADD Brand ",2);
+                 //System.out.println("Locations Not Added");
             }
         } catch (SQLException ex) {
             Logger.getLogger(brand_Cls.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,9 +103,11 @@ public class brand_Cls {
                 ps.setInt(3, _id);
 
                 if (ps.executeUpdate() != 0) {
-                    System.out.println("Brand Edited");
+                    JOptionPane.showMessageDialog(null , "The Brand Has Been Edited","Edit Brand ",1);
+                 //System.out.println("Locations Edited");
                 } else {
-                    System.out.println("Brand Not Edited");
+                    JOptionPane.showMessageDialog(null , "Brand Not Edited","Edit Brand ",2);
+                    //System.out.println("Locations Not Edited");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(brand_Cls.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,9 +129,11 @@ public class brand_Cls {
         ps.setInt(1, _id); // Set the value of the first parameter to _id
     
         if (ps.executeUpdate() != 0) {
-            System.out.println("Brand removed");
+            JOptionPane.showMessageDialog(null , "The Brand Has Been removed","Delete Brand ",1);
+            //System.out.println("Locations removed");
         } else {
-            System.out.println("Brand Not removed");
+            JOptionPane.showMessageDialog(null , "Brand Not removed","Delete Brand ",2);
+            //System.out.println("Locations Not removed");
         }
     } catch (SQLException ex) {
         ex.printStackTrace();   
@@ -207,6 +215,25 @@ public class brand_Cls {
             }
 
             return brand;
+    }
+    
+    // create  a function to poplate a hashmap with brands ( id and name)
+    public HashMap<String , Integer> brandsHashMap()
+    {
+        HashMap<String , Integer> brands_map = new HashMap<String , Integer>();
+        
+        ResultSet rs= getData("SELECT * FROM `brands`");
+        
+        try {
+            while(rs.next())
+            {
+                brands_map.put(rs.getString(2),rs.getInt(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(brand_Cls.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return brands_map;
+        
     }
     
 }

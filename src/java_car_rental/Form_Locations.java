@@ -4,175 +4,91 @@
  */
 package java_car_rental;
 
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java_car_rental.classes.brand_Cls;
+import java_car_rental.classes.Location;
 import javax.swing.JOptionPane;
+
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author mac
  */
-public class Form_Brands extends javax.swing.JFrame {
+public class Form_Locations extends javax.swing.JFrame {
 
     /**
-     * Creates new form Form_Brands
+     * Creates new form Form_Locations
      */
     
-    brand_Cls brand = new brand_Cls();
-    ArrayList<brand_Cls> brands_list = brand.brandsList();
-    int index = 0 ;
+    Location location = new Location();
+    ArrayList<Location> locations_list = location.locationList();
+    int index=0;
     
-    
-    public Form_Brands() {
+    public Form_Locations() {
         initComponents();
         
+        //center the form
+        this.setLocationRelativeTo(null) ;
         
-        // center the form 
-        this.setLocationRelativeTo(null);
+        // populate jTable
+        populateJtableWithLocations();
         
-        
-        //populate jtable 
-        populateJtableWithBrands();
         
     }
 
-      public void displayImage (int width, int height, String image_path, JLabel label){
-        //get the image
-        ImageIcon imageIco = new ImageIcon(image_path);
-        //resize the image
-        Image image = imageIco.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        //set the image into the jlabel
-        label.setIcon(new ImageIcon(image));
-    }
-      
-       public void displayByteImage(int width, int height, byte[] image_byte, JLabel label) {
-    if (image_byte != null) { // Check if the image_byte is not null
-        // Get the image
-        ImageIcon imageIco = new ImageIcon(image_byte);
-
-        // Resize the image
-        Image image = imageIco.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-
-        // Set the image into the JLabel
-        label.setIcon(new ImageIcon(image));
-    } else {
-        // Handle the case where image_byte is null (e.g., display a default image)
-        label.setIcon(null); // Clear the label's icon
-    }
-}
-
-    //create a function to select an image 
-    //the function will return the image path
-    //use image with a low size 
-    public String selectImage ()
-    {
-            
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Select Picture");
-        
-        fileChooser.setCurrentDirectory(new File("/Users/mac/Desktop/stage/Java_Car_Rental/src/java_car_rental/images"));
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("image",".png",".jpg");
-        fileChooser.addChoosableFileFilter(filter);
-        
-        int state = fileChooser.showSaveDialog(null);
-        String path = "";
-        
-        if(state == JFileChooser.APPROVE_OPTION)
-        {
-            path =fileChooser.getSelectedFile().getAbsolutePath();
-        }
-        
-        return path;
-    }
     
-    //create a function to populate the jtable whith brand(id & name )
+    //create a function to populate the jtable whith location (id & city & address )
     
-    public void populateJtableWithBrands()
+    public void populateJtableWithLocations()
     {
         //clear array list 
-        brands_list.clear();
+        locations_list.clear();
         //populate arraylist
-        brands_list = brand.brandsList();   
+        locations_list = location.locationList();   
         //jtable columns
-        String[] columnsName = {"ID","Name"};
+        String[] columnsName = {"ID","City","Address"};
         
         //jtable rows 
-        Object[][] rows = new Object[brands_list.size()][columnsName.length];
+        Object[][] rows = new Object[locations_list.size()][columnsName.length];
         
-        for(int i=0;i<brands_list.size();i++)
+        for(int i=0;i<locations_list.size();i++)
         {
-            rows[i][0]  =brands_list.get(i).getId();
-            rows[i][1]  =brands_list.get(i).getName(); 
-            
+            rows[i][0]  =locations_list.get(i).getId();
+            rows[i][1]  =locations_list.get(i).getCity(); 
+            rows[i][2]  =locations_list.get(i).getAddress(); 
             
         }
         
         DefaultTableModel model = new DefaultTableModel(rows,columnsName);
-        jTable_Brands.setModel(model);
+        jTable_Locations.setModel(model);
         
     }
     
-    
-    
-    //create a function to display  brand 
-    public void displayBrand(int _index)
+    //create a function to display  location
+    public void displayLocation(int _index)
     {
-        brand_Cls selected_brand = brands_list.get(_index);
-        jSpinner_id.setValue(selected_brand.getId());
-        jTextField_name.setText(selected_brand.getName());
-        displayByteImage(jLabel_logo.getWidth(), jLabel_logo.getHeight(), selected_brand.getLogo(),jLabel_logo);   
+        Location selected_location = locations_list.get(_index);
+        jSpinner_id.setValue(selected_location.getId());
+        jComboBox_City.setSelectedItem(selected_location.getCity());
+        jTextArea_Address.setText(selected_location.getAddress());
+        
     }
     
     //create a function to check empty fields
-    public boolean verify(String add_or_edit)
+    public boolean verify()
     {
-        String name = jTextField_name.getText();
-        String pic_path = jLabel_imagePath.getText();
-        boolean val = false;
+        String address = jTextArea_Address.getText();
         
-        if (!name.trim().equals(""))
+        
+        if (!address.trim().equals(""))
         {
-            if ("add".equals(add_or_edit))
-            {
-                if(pic_path.trim().equals(""))
-                {
-                    JOptionPane.showMessageDialog(null , "Enter Valid Brand Data","Invalid Info",1);
-                    val= false;
-                }
-                else
-                {
-                    val= true;
-                }
-            }if ("edit".equals(add_or_edit))
-            {
-                if(jLabel_logo.getIcon() == null)
-                {
-                    JOptionPane.showMessageDialog(null , "Enter Valid Brand Data","Invalid Info",2);
-                    val= false;
-                }
-                else
-                {
-                    val= true;
-                }      
-            }
+            return true;
             
         }else{
-            JOptionPane.showMessageDialog(null , "Enter Valid Brand Data","Invalid Info",2);
-                    val= false;
-        }
-        return val;
+            JOptionPane.showMessageDialog(null , "Enter Valid Location Address","Invalid Info",2);
+            return false;
+        
+        }   
     }
     
     /**
@@ -191,14 +107,11 @@ public class Form_Brands extends javax.swing.JFrame {
         jLabel_brands_logo = new javax.swing.JLabel();
         jLabel_close = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_Brands = new javax.swing.JTable();
+        jTable_Locations = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSpinner_id = new javax.swing.JSpinner();
-        jTextField_name = new javax.swing.JTextField();
-        jLabel_logo = new javax.swing.JLabel();
-        jButton_browse = new javax.swing.JButton();
         jButton_Edit = new javax.swing.JButton();
         jButton_Add1 = new javax.swing.JButton();
         jButton_Remove = new javax.swing.JButton();
@@ -206,9 +119,11 @@ public class Form_Brands extends javax.swing.JFrame {
         jButton_Next = new javax.swing.JButton();
         jButton_Previous = new javax.swing.JButton();
         jButton_Last = new javax.swing.JButton();
-        jLabel_imagePath = new javax.swing.JLabel();
         jButton_Refresh = new javax.swing.JButton();
         jButton_Clean = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea_Address = new javax.swing.JTextArea();
+        jComboBox_City = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -216,12 +131,12 @@ public class Form_Brands extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel3.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel3.setBackground(new java.awt.Color(230, 126, 34));
 
         jLabel4.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Brands");
+        jLabel4.setText("Locations");
 
         jLabel_close.setFont(new java.awt.Font("Verdana", 0, 48)); // NOI18N
         jLabel_close.setForeground(new java.awt.Color(255, 255, 255));
@@ -241,7 +156,7 @@ public class Form_Brands extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel_brands_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(287, 287, 287)
+                .addGap(248, 248, 248)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -259,7 +174,7 @@ public class Form_Brands extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTable_Brands.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Locations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -270,38 +185,25 @@ public class Form_Brands extends javax.swing.JFrame {
 
             }
         ));
-        jTable_Brands.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable_Locations.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable_BrandsMouseClicked(evt);
+                jTable_LocationsMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable_Brands);
+        jScrollPane1.setViewportView(jTable_Locations);
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jLabel1.setText("Name:");
+        jLabel1.setText("    City:");
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel2.setText("ID:");
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jLabel3.setText("Logo:");
+        jLabel3.setText("Address:");
 
         jSpinner_id.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
 
-        jTextField_name.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-
-        jLabel_logo.setBackground(new java.awt.Color(102, 255, 102));
-        jLabel_logo.setOpaque(true);
-
-        jButton_browse.setText("Browse");
-        jButton_browse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton_browse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_browseActionPerformed(evt);
-            }
-        });
-
-        jButton_Edit.setBackground(new java.awt.Color(29, 209, 161));
+        jButton_Edit.setBackground(new java.awt.Color(243, 156, 18));
         jButton_Edit.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jButton_Edit.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Edit.setText("Edit");
@@ -312,7 +214,7 @@ public class Form_Brands extends javax.swing.JFrame {
             }
         });
 
-        jButton_Add1.setBackground(new java.awt.Color(29, 209, 161));
+        jButton_Add1.setBackground(new java.awt.Color(243, 156, 18));
         jButton_Add1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jButton_Add1.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Add1.setText("Add");
@@ -323,7 +225,7 @@ public class Form_Brands extends javax.swing.JFrame {
             }
         });
 
-        jButton_Remove.setBackground(new java.awt.Color(29, 209, 161));
+        jButton_Remove.setBackground(new java.awt.Color(243, 156, 18));
         jButton_Remove.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jButton_Remove.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Remove.setText("Remove");
@@ -374,9 +276,7 @@ public class Form_Brands extends javax.swing.JFrame {
             }
         });
 
-        jLabel_imagePath.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
-
-        jButton_Refresh.setBackground(new java.awt.Color(29, 209, 161));
+        jButton_Refresh.setBackground(new java.awt.Color(243, 156, 18));
         jButton_Refresh.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jButton_Refresh.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Refresh.setText("Refresh");
@@ -387,7 +287,7 @@ public class Form_Brands extends javax.swing.JFrame {
             }
         });
 
-        jButton_Clean.setBackground(new java.awt.Color(29, 209, 161));
+        jButton_Clean.setBackground(new java.awt.Color(243, 156, 18));
         jButton_Clean.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jButton_Clean.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Clean.setText("Clean");
@@ -398,6 +298,14 @@ public class Form_Brands extends javax.swing.JFrame {
             }
         });
 
+        jTextArea_Address.setColumns(20);
+        jTextArea_Address.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextArea_Address.setRows(5);
+        jScrollPane2.setViewportView(jTextArea_Address);
+
+        jComboBox_City.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jComboBox_City.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "City 1", "City 2", "City 3", "City 4" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -405,43 +313,37 @@ public class Form_Brands extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel_imagePath, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(61, 61, 61)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(69, 69, 69)
-                                        .addComponent(jLabel3)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton_browse, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                                    .addComponent(jLabel_logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jSpinner_id, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField_name)))
+                                .addGap(44, 44, 44)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(31, 31, 31))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSpinner_id, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox_City, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton_Refresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton_Clean, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(99, 99, 99)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jButton_Refresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton_Clean, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jButton_Add1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jButton_Edit, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton_Remove, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 92, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
+                                .addComponent(jButton_Add1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jButton_Edit, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton_Remove, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(52, 52, 52)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -461,33 +363,22 @@ public class Form_Brands extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton_First, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton_Previous, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton_Next, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton_Last, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSpinner_id)
+                        .addGap(73, 73, 73)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jSpinner_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox_City))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel_imagePath, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_browse, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(93, 93, 93)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton_Edit, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton_Remove, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -495,8 +386,18 @@ public class Form_Brands extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton_Refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_Clean, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                            .addComponent(jButton_Clean, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_First, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton_Previous, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton_Next, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton_Last, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -533,137 +434,101 @@ public class Form_Brands extends javax.swing.JFrame {
     private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
         // close the form when clicked
         this.dispose();
-        
+
     }//GEN-LAST:event_jLabel_closeMouseClicked
 
-    private void jButton_browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_browseActionPerformed
-        // browse and display image 
-        String imagePath = selectImage();
-        displayImage(jLabel_logo.getWidth(),jLabel_logo.getHeight(),imagePath,jLabel_logo);
-        //display the image path 
-        jLabel_imagePath.setText(imagePath);
-    }//GEN-LAST:event_jButton_browseActionPerformed
+    private void jTable_LocationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_LocationsMouseClicked
 
-    private void jButton_Add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Add1ActionPerformed
-        // add a new brand
+        // get the selected rand
         
-        try {
-            
-            String name = jTextField_name.getText();
-            byte[] logo = Files.readAllBytes(Paths.get(jLabel_imagePath.getText()));
-            
-            if(verify("add")){
-                brand_Cls brand = new brand_Cls();
-                brand.addBrand(name,logo);
-            }
-            
-            
-                    
-        } catch (Exception ex) {
-            //Logger.getLogger(Form_Brands.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null , "Select the brand Logo [ "+ex.getMessage()+"]"," Brand Logo",1);
-        }
+        // get the selected rand 
+        int index = jTable_Locations.getSelectedRow();
+//        int id =Integer.parseInt(jTable_Locations.getValueAt(index, 0).toString());
+//        Location brd= brand.getBrandById(id);
+        jSpinner_id.setValue(Integer.parseInt(jTable_Locations.getValueAt(index, 0).toString()));
+        jComboBox_City.setSelectedItem(jTable_Locations.getValueAt(index, 1).toString());
+        jTextArea_Address.setText(jTable_Locations.getValueAt(index, 2).toString());
         
         
-    }//GEN-LAST:event_jButton_Add1ActionPerformed
+    }//GEN-LAST:event_jTable_LocationsMouseClicked
 
     private void jButton_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EditActionPerformed
-        // edit a brand info
+        // edit a Location info
+        int id = (int) jSpinner_id.getValue();
+        String city = jComboBox_City.getSelectedItem().toString();
+        String address = jTextArea_Address.getText();
         
-        try {
-            int id = (int) jSpinner_id.getValue();
-            String name = jTextField_name.getText();
-            byte[] logo ;
-            
-            if(jLabel_imagePath.getText().trim().equals(""))
-            {
-                logo = brand.getBrandById(id).getLogo();
-            }else
-            {
-                logo = Files.readAllBytes(Paths.get(jLabel_imagePath.getText()));
-            }
-            if(verify("edit ")){
-            brand_Cls brand = new brand_Cls();
-            brand.editBrand(id,name,logo);
-            }
-                    
-        } catch (Exception ex) {
-            //Logger.getLogger(Form_Brands.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null , "Select the brand Logo [ "+ex.getMessage()+"]"," Brand Logo",1);
+        if(verify())
+        {
+        location.editLocation(id, city, address);
         }
-        
     }//GEN-LAST:event_jButton_EditActionPerformed
 
-    private void jButton_RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RemoveActionPerformed
+    private void jButton_Add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Add1ActionPerformed
+        // add a new Location
+        String city = jComboBox_City.getSelectedItem().toString();
+        String address = jTextArea_Address.getText();
         
-        // Remove delete a brand
+        if(verify())
+        {
+            location.addLocation(city,address);
+        }
+
+
+    }//GEN-LAST:event_jButton_Add1ActionPerformed
+
+    private void jButton_RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RemoveActionPerformed
+
+        // Remove delete a Location
         
         int id = (int) jSpinner_id.getValue();
-        
-        int confirm = JOptionPane.showConfirmDialog(null,"Are You Sure You Want To Delete This Brand","confirm",JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(null,"Are You Sure You Want To Delete This Location ","confirm",JOptionPane.YES_NO_OPTION);
         if(confirm == JOptionPane.YES_OPTION)
         {
-            brand_Cls brand = new brand_Cls();
-            brand.removeBrand(id);
+            location.removeLocation(id);
         }
-           
     }//GEN-LAST:event_jButton_RemoveActionPerformed
-
-    private void jTable_BrandsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_BrandsMouseClicked
-                                                
-                                            
-        // get the selected rand 
-        int index = jTable_Brands.getSelectedRow();
-        int id =Integer.parseInt(jTable_Brands.getValueAt(index, 0).toString());
-        brand_Cls brd= brand.getBrandById(id);
-        jSpinner_id.setValue(brd.getId());
-        jTextField_name.setText(brd.getName());
-        displayByteImage(jLabel_logo.getWidth(), jLabel_logo.getHeight(), brd.getLogo(),jLabel_logo);
-        
-        
-    
-    }//GEN-LAST:event_jTable_BrandsMouseClicked
-
-    private void jButton_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RefreshActionPerformed
-        // refresh the jtable
-        populateJtableWithBrands();
-        
-    }//GEN-LAST:event_jButton_RefreshActionPerformed
-
-    private void jButton_CleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CleanActionPerformed
-        // clean
-        jSpinner_id.setValue(0);
-        jTextField_name.setText("");
-        jLabel_logo.setIcon(null);
-        jLabel_imagePath.setText("");
-        
-    }//GEN-LAST:event_jButton_CleanActionPerformed
 
     private void jButton_FirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_FirstActionPerformed
         // Button first:
-        index = 0 ;
-        displayBrand(index);
+       index = 0 ;
+        displayLocation(index);
     }//GEN-LAST:event_jButton_FirstActionPerformed
 
     private void jButton_NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NextActionPerformed
         // Button next:
-        index++;
-        if(index > brands_list.size()-1){ index = brands_list.size()-1 ; }
-        displayBrand(index);
+       index++;
+        if(index > locations_list.size()-1){ index = locations_list.size()-1 ; }
+        displayLocation(index);
     }//GEN-LAST:event_jButton_NextActionPerformed
 
     private void jButton_PreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_PreviousActionPerformed
         // Button Previous:
         index--;
         if(index < 0){ index = 0 ; }
-        displayBrand(index);
+        displayLocation(index);
     }//GEN-LAST:event_jButton_PreviousActionPerformed
 
     private void jButton_LastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LastActionPerformed
         // Button Last:
-        index = brands_list.size()-1;
-        displayBrand(index);
+       index = locations_list.size()-1;
+        displayLocation(index);
     }//GEN-LAST:event_jButton_LastActionPerformed
+
+    private void jButton_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RefreshActionPerformed
+        // refresh the jtable
+        populateJtableWithLocations();
+
+    }//GEN-LAST:event_jButton_RefreshActionPerformed
+
+    private void jButton_CleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CleanActionPerformed
+        // clean
+        jSpinner_id.setValue(0);
+        jComboBox_City.setSelectedIndex(0);
+        jTextArea_Address.setText("");
+
+
+    }//GEN-LAST:event_jButton_CleanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -682,20 +547,20 @@ public class Form_Brands extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Form_Brands.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Form_Locations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Form_Brands.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Form_Locations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Form_Brands.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Form_Locations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Form_Brands.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Form_Locations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Form_Brands().setVisible(true);
+                new Form_Locations().setVisible(true);
             }
         });
     }
@@ -710,21 +575,20 @@ public class Form_Brands extends javax.swing.JFrame {
     private javax.swing.JButton jButton_Previous;
     private javax.swing.JButton jButton_Refresh;
     private javax.swing.JButton jButton_Remove;
-    private javax.swing.JButton jButton_browse;
+    private javax.swing.JComboBox<String> jComboBox_City;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_brands_logo;
     private javax.swing.JLabel jLabel_close;
-    private javax.swing.JLabel jLabel_imagePath;
-    private javax.swing.JLabel jLabel_logo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinner_id;
-    private javax.swing.JTable jTable_Brands;
-    private javax.swing.JTextField jTextField_name;
+    private javax.swing.JTable jTable_Locations;
+    private javax.swing.JTextArea jTextArea_Address;
     // End of variables declaration//GEN-END:variables
 }

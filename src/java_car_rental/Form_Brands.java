@@ -571,21 +571,24 @@ public class Form_Brands extends javax.swing.JFrame {
         // edit a brand info
         
         try {
-            int id = (int) jSpinner_id.getValue();
-            String name = jTextField_name.getText();
-            byte[] logo ;
-            
-            if(jLabel_imagePath.getText().trim().equals(""))
-            {
-                logo = brand.getBrandById(id).getLogo();
-            }else
-            {
-                logo = Files.readAllBytes(Paths.get(jLabel_imagePath.getText()));
-            }
-            if(verify("edit ")){
-            brand_Cls brand = new brand_Cls();
-            brand.editBrand(id,name,logo);
-            }
+                int id = (int) jSpinner_id.getValue();
+                String name = jTextField_name.getText();
+                byte[] logo ;
+
+                if(jLabel_imagePath.getText().trim().equals(""))
+                {
+                    logo = brand.getBrandById(id).getLogo();
+                }else
+                {
+                    logo = Files.readAllBytes(Paths.get(jLabel_imagePath.getText()));
+                }
+                if(verify("edit "))
+                {
+                        brand_Cls brand = new brand_Cls();
+                    
+                        brand.editBrand(id,name,logo);
+                    
+                }
                     
         } catch (Exception ex) {
             //Logger.getLogger(Form_Brands.class.getName()).log(Level.SEVERE, null, ex);

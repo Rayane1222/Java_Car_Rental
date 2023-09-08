@@ -4,8 +4,12 @@
  */
 package java_car_rental;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java_car_rental.classes.Car;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -17,9 +21,13 @@ public class Form_CarsList extends javax.swing.JFrame {
      * Creates new form Form_CarsList
      */
     
-    Car car = new Car();
-    ArrayList<Car> car_list = car.carsList();
     
+    Car car = new Car();
+    //the car id
+    int carid;
+    ArrayList<Car> car_list = car.carsList();
+    //table of jlables
+    JLabel[] labels = new JLabel[6];
     public Form_CarsList() {
         initComponents();
         
@@ -29,6 +37,13 @@ public class Form_CarsList extends javax.swing.JFrame {
         populateJtableWithBrands();
         
         jTable_Cars.setRowHeight(25);
+        
+        labels[0]=jLabel_car_Image_1;
+        labels[1]=jLabel_car_Image_2;
+        labels[2]=jLabel_car_Image_3;
+        labels[3]=jLabel_car_Image_4;
+        labels[4]=jLabel_car_Image_5;
+        labels[5]=jLabel_car_Image_6;
     }
 
     //create a function to populate the jtable whith cars
@@ -73,6 +88,22 @@ public class Form_CarsList extends javax.swing.JFrame {
         
     }
     
+    public void displayByteImage(int width, int height, byte[] image_byte, JLabel label) {
+    if (image_byte != null) { // Check if the image_byte is not null
+        // Get the image
+        ImageIcon imageIco = new ImageIcon(image_byte);
+
+        // Resize the image
+        Image image = imageIco.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+        // Set the image into the JLabel
+        label.setIcon(new ImageIcon(image));
+    } else {
+        // Handle the case where image_byte is null (e.g., display a default image)
+        label.setIcon(null); // Clear the label's icon
+    }
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,8 +121,15 @@ public class Form_CarsList extends javax.swing.JFrame {
         jLabel_close = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_Cars = new javax.swing.JTable();
-        jButton_Brand_Cars = new javax.swing.JButton();
         jLabel_Car_Image = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel_car_Image_1 = new javax.swing.JLabel();
+        jLabel_car_Image_5 = new javax.swing.JLabel();
+        jLabel_car_Image_3 = new javax.swing.JLabel();
+        jLabel_car_Image_4 = new javax.swing.JLabel();
+        jLabel_car_Image_2 = new javax.swing.JLabel();
+        jLabel_car_Image_6 = new javax.swing.JLabel();
+        jButton_ShowSliderForm_ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,19 +200,74 @@ public class Form_CarsList extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable_Cars);
 
-        jButton_Brand_Cars.setBackground(new java.awt.Color(22, 160, 133));
-        jButton_Brand_Cars.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
-        jButton_Brand_Cars.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_Brand_Cars.setText("Display This Brand Cars");
-        jButton_Brand_Cars.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton_Brand_Cars.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Brand_CarsActionPerformed(evt);
-            }
-        });
-
         jLabel_Car_Image.setBackground(new java.awt.Color(204, 204, 204));
         jLabel_Car_Image.setOpaque(true);
+
+        jLabel_car_Image_1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel_car_Image_1.setOpaque(true);
+
+        jLabel_car_Image_5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel_car_Image_5.setOpaque(true);
+
+        jLabel_car_Image_3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel_car_Image_3.setOpaque(true);
+
+        jLabel_car_Image_4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel_car_Image_4.setOpaque(true);
+
+        jLabel_car_Image_2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel_car_Image_2.setOpaque(true);
+
+        jLabel_car_Image_6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel_car_Image_6.setOpaque(true);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_car_Image_1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_car_Image_5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel_car_Image_4, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(jLabel_car_Image_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel_car_Image_3, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(jLabel_car_Image_6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel_car_Image_1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_car_Image_3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_car_Image_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel_car_Image_5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_car_Image_4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_car_Image_6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jButton_ShowSliderForm_.setBackground(new java.awt.Color(22, 160, 133));
+        jButton_ShowSliderForm_.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        jButton_ShowSliderForm_.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_ShowSliderForm_.setText("Images Slider");
+        jButton_ShowSliderForm_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_ShowSliderForm_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ShowSliderForm_ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -182,16 +275,15 @@ public class Form_CarsList extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 917, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 989, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel_Car_Image, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton_Brand_Cars, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel_Car_Image, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton_ShowSliderForm_, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,12 +291,14 @@ public class Form_CarsList extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel_Car_Image, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jButton_Brand_Cars, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(jLabel_Car_Image, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_ShowSliderForm_, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -245,19 +339,49 @@ public class Form_CarsList extends javax.swing.JFrame {
 
     private void jTable_CarsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_CarsMouseClicked
 
-        // get the selected car Image
-        /*int index = jTable_Cars.getSelectedRow();
-        int id =Integer.parseInt(jTable_Cars.getValueAt(index, 0).toString());
-        Car brd= Car.getCarById(id);
-        displayByteImage(jLabel_Car_Image.getWidth(), jLabel_Car_Image.getHeight(), brd.getLogo(),jLabel_Car_Image);
-        */
+        //clear images 
+        jLabel_Car_Image.setIcon(null);
         
+        for(int i=0;i<labels.length;i++)
+        {
+            labels[i].setIcon(null);
+        }
+        
+        // get the selected car Image
+        int index = jTable_Cars.getSelectedRow();
+        int id =Integer.parseInt(jTable_Cars.getValueAt(index, 0).toString());//car id
+        carid =id;// i need it to use it on the image slider 
+        //Car car= Car.getCarById(id);
+        
+        ArrayList<Car.CarImage> images = car.carImagesList(id);
+        //display images on the jlabels
+        
+        
+        if(images.size() >0)
+        { 
+            displayByteImage(jLabel_Car_Image.getWidth(), jLabel_Car_Image.getHeight(), images.get(0).getCar_img(),jLabel_Car_Image);
+        for(int i =0;i<images.size();i++)
+        {
+            if(i<labels.length)
+                displayByteImage(labels[i].getWidth(), labels[i].getHeight(), images.get(i).getCar_img(),labels[i]);
+        }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null , "This Car Has No Images","No Image",2);
+        }
     }//GEN-LAST:event_jTable_CarsMouseClicked
 
-    private void jButton_Brand_CarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Brand_CarsActionPerformed
-        //
+    private void jButton_ShowSliderForm_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ShowSliderForm_ActionPerformed
+        //show car image in a slider 
+        try{
+        Form_CarImages_Slider slider = new Form_CarImages_Slider(carid);
+         slider.setVisible(true);
+        }catch(Exception ex ){
+            JOptionPane.showMessageDialog(null , "This Car Has No Images","No Image",2);
+        }
 
-    }//GEN-LAST:event_jButton_Brand_CarsActionPerformed
+    }//GEN-LAST:event_jButton_ShowSliderForm_ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,14 +419,21 @@ public class Form_CarsList extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_Brand_Cars;
+    private javax.swing.JButton jButton_ShowSliderForm_;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_Car_Image;
     private javax.swing.JLabel jLabel_brands_logo;
+    private javax.swing.JLabel jLabel_car_Image_1;
+    private javax.swing.JLabel jLabel_car_Image_2;
+    private javax.swing.JLabel jLabel_car_Image_3;
+    private javax.swing.JLabel jLabel_car_Image_4;
+    private javax.swing.JLabel jLabel_car_Image_5;
+    private javax.swing.JLabel jLabel_car_Image_6;
     private javax.swing.JLabel jLabel_close;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_Cars;
     // End of variables declaration//GEN-END:variables

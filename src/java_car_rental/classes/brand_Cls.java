@@ -112,10 +112,10 @@ public class brand_Cls {
                     JOptionPane.showMessageDialog(null , "Brand Not Edited","Edit Brand ",2);
                     //System.out.println("Locations Not Edited");
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(brand_Cls.class.getName()).log(Level.SEVERE, null, ex);
-                System.err.println("Error: " + ex.getMessage()); // Print the error message
-            }
+            } catch (Exception ex) {
+            //Logger.getLogger(Form_Brands.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null , "Select the brand Logo [ "+ex.getMessage()+"]"," Brand Logo",1);
+        }
 
 
         

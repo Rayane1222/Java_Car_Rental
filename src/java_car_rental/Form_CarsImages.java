@@ -106,10 +106,10 @@ public class Form_CarsImages extends javax.swing.JFrame {
     public void populateJtableWithCarImages(int car_id)
     {
         
-         ArrayList<Integer> imagesList = car.carImagesList(car_id);
+         ArrayList<Car.CarImage> imagesList = car.carImagesList(car_id);
         
         //jtable columns
-        String[] columnsName = {"Image ID"};
+        String[] columnsName = {"Image", "ID"};
         
         //jtable rows 
         Object[][] rows = new Object[imagesList.size()][columnsName.length];
@@ -437,6 +437,11 @@ public class Form_CarsImages extends javax.swing.JFrame {
 
     private void jButton_images_SlidersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_images_SlidersActionPerformed
         // Show images (for the selected car ) slider :
+        // get the selected car Image
+        int index = jTable_Cars.getSelectedRow();
+        int id =Integer.parseInt(jTable_Cars.getValueAt(index, 0).toString());//car id
+        Form_CarImages_Slider slider = new Form_CarImages_Slider(id);
+        slider.setVisible(true);
     }//GEN-LAST:event_jButton_images_SlidersActionPerformed
 
     private void jButton_Add_ImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Add_ImageActionPerformed

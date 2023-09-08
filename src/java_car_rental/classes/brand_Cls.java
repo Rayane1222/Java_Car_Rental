@@ -26,14 +26,17 @@ public class brand_Cls {
     private int id;
     private String name;
     private byte[] logo;
-    
-    public brand_Cls() {}
 
-    public brand_Cls(int _id, String _name, byte[] _logo) {
-        this.id = _id;
-        this.name = _name;
-        this.logo = _logo;
+    public brand_Cls() {
     }
+
+    public brand_Cls(int id, String name, byte[] logo) {
+        this.id = id;
+        this.name = name;
+        this.logo = logo;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -218,16 +221,16 @@ public class brand_Cls {
     }
     
     // create  a function to poplate a hashmap with brands ( id and name)
-    public HashMap<String , Integer> brandsHashMap()
+    public HashMap< Integer, String > brandsHashMap()
     {
-        HashMap<String , Integer> brands_map = new HashMap<String , Integer>();
+        HashMap<Integer, String> brands_map = new HashMap<Integer, String>();
         
         ResultSet rs= getData("SELECT * FROM `brands`");
         
         try {
             while(rs.next())
             {
-                brands_map.put(rs.getString(2),rs.getInt(1));
+                brands_map.put(rs.getInt(1),rs.getString(2));
             }
         } catch (SQLException ex) {
             Logger.getLogger(brand_Cls.class.getName()).log(Level.SEVERE, null, ex);

@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java_car_rental.classes.Car;
 import javax.swing.ImageIcon;
@@ -29,6 +30,7 @@ public class Form_CarsImages extends javax.swing.JFrame {
     
     Car car = new Car();
     ArrayList<Car> cars_list = car.carsList();
+    ArrayList<Car.CarImage> carImages;
    
     
     public Form_CarsImages() {
@@ -49,6 +51,22 @@ public class Form_CarsImages extends javax.swing.JFrame {
         //set the image into the jlabel
         label.setIcon(new ImageIcon(image));
     }
+     
+      public void displayByteImage(int width, int height, byte[] image_byte, JLabel label) {
+    if (image_byte != null) { // Check if the image_byte is not null
+        // Get the image
+        ImageIcon imageIco = new ImageIcon(image_byte);
+
+        // Resize the image
+        Image image = imageIco.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+        // Set the image into the JLabel
+        label.setIcon(new ImageIcon(image));
+    } else {
+        // Handle the case where image_byte is null (e.g., display a default image)
+        label.setIcon(null); // Clear the label's icon
+    }
+}
      
      //create a function to select an image 
     //the function will return the image path
@@ -109,14 +127,14 @@ public class Form_CarsImages extends javax.swing.JFrame {
          ArrayList<Car.CarImage> imagesList = car.carImagesList(car_id);
         
         //jtable columns
-        String[] columnsName = {"Image", "ID"};
+        String[] columnsName = {"Image ID"};
         
         //jtable rows 
         Object[][] rows = new Object[imagesList.size()][columnsName.length];
         
         for(int i=0;i<imagesList.size();i++)
         {
-            rows[i][0]  =imagesList.get(i);
+            rows[i][0]  =imagesList.get(i).getImg_id();
             
             
         }
@@ -415,6 +433,7 @@ public class Form_CarsImages extends javax.swing.JFrame {
         int id =Integer.parseInt(jTable_Cars.getValueAt(index, 0).toString());
         System.out.println(id);
         populateJtableWithCarImages( id);
+        carImages = car.carImagesList(id);
 
     }//GEN-LAST:event_jTable_CarsMouseClicked
 
@@ -428,11 +447,43 @@ public class Form_CarsImages extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_Select_ImageActionPerformed
 
     private void jTable_Car_ImagesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Car_ImagesMouseClicked
-        // TODO add your handling code here:
+        // Display the selected image 
+        //get image id from the jtable 
+        
+            int index=jTable_Car_Images.getSelectedRow();
+            int image_id = Integer.parseInt(jTable_Car_Images.getValueAt(index,0).toString());
+            
+            byte[] img = null;
+            
+            for(Car.CarImage cimg : carImages)
+            {
+                if(cimg.getImg_id() == image_id)
+                {
+                    img = cimg.getCar_img();
+                }
+            }
+            
+        displayByteImage(jLabel_CarImage.getWidth(),jLabel_CarImage.getHeight(),img,jLabel_CarImage);
+        
     }//GEN-LAST:event_jTable_Car_ImagesMouseClicked
 
     private void jButton_Remove_ImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Remove_ImageActionPerformed
         // delete image 
+        //get selected image id
+        try{
+            int index=jTable_Car_Images.getSelectedRow();
+            int image_id = Integer.parseInt(jTable_Car_Images.getValueAt(index,0).toString());
+            int confirm = JOptionPane.showConfirmDialog(null,"Are You Sure You Want To Delete This Image","confirm",JOptionPane.YES_NO_OPTION);
+            if(confirm == JOptionPane.YES_OPTION)
+            {
+
+                    car.removeCarImage(image_id);
+
+            }
+        }catch (Exception ex) 
+        {  
+            JOptionPane.showMessageDialog(null , "Select the Car Image","Delete Car Image ",2);
+        }
     }//GEN-LAST:event_jButton_Remove_ImageActionPerformed
 
     private void jButton_images_SlidersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_images_SlidersActionPerformed

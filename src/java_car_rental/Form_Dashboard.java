@@ -58,7 +58,7 @@ public final class Form_Dashboard extends javax.swing.JFrame {
         jLabel_Location = new javax.swing.JLabel();
         jLabel_Brand = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel_customers = new javax.swing.JLabel();
         jLabel_close = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -123,9 +123,15 @@ public final class Form_Dashboard extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Menu Item 1");
 
-        jLabel5.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Menu Item 1");
+        jLabel_customers.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
+        jLabel_customers.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_customers.setText("Customers");
+        jLabel_customers.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_customers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_customersMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -138,7 +144,7 @@ public final class Form_Dashboard extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel_Location, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_customers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_Brand, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -152,7 +158,7 @@ public final class Form_Dashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel_Location, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel_customers, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(238, Short.MAX_VALUE))
@@ -451,6 +457,12 @@ public final class Form_Dashboard extends javax.swing.JFrame {
          frm_brd.setVisible(true);
     }//GEN-LAST:event_jLabel_LocationMouseClicked
 
+    private void jLabel_customersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_customersMouseClicked
+        // open the Customers form
+        Form_Customers frm_brd = new Form_Customers();
+         frm_brd.setVisible(true);
+    }//GEN-LAST:event_jLabel_customersMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -490,7 +502,6 @@ public final class Form_Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel_Brand;
     private javax.swing.JLabel jLabel_Cars;
@@ -500,6 +511,7 @@ public final class Form_Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_cars_Logo;
     private javax.swing.JLabel jLabel_cars_count;
     private javax.swing.JLabel jLabel_close;
+    private javax.swing.JLabel jLabel_customers;
     private javax.swing.JLabel jLabel_customers_Logo;
     private javax.swing.JLabel jLabel_customers_Logo1;
     private javax.swing.JLabel jLabel_customers_count;

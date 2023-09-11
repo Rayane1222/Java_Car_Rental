@@ -376,6 +376,26 @@ public class Car {
       
     }
     
+     public void removeCarImage(int img_id) {
+    String deleteQuery = "DELETE FROM `car_images` WHERE `id`=?";
+    
+    PreparedStatement ps;
+    try {
+        ps = DB.getConnection().prepareStatement(deleteQuery);
+        ps.setInt(1, img_id); // Set the value of the first parameter to _id
+    
+        if (ps.executeUpdate() != 0) {
+            JOptionPane.showMessageDialog(null , "The Car Image Has Been removed","Delete Car Image ",1);
+           
+        } else {
+            JOptionPane.showMessageDialog(null , "Car Image Not removed","Delete Car Image ",2);
+           
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();   
+        JOptionPane.showMessageDialog(null , "Select the Car Image","Delete Car Image ",2);
+    }
+}
     
     
     //create a class for images

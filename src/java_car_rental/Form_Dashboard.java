@@ -4,9 +4,12 @@
  */
 package java_car_rental;
 
+import java.awt.Color;
 import java.awt.Image;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
 
 /**
  *
@@ -17,6 +20,10 @@ public final class Form_Dashboard extends javax.swing.JFrame {
     /**
      * Creates new form Form_Dashboard
      */
+    
+    Border white_border = BorderFactory.createMatteBorder(0,0,2,0,Color.white);
+    Border empty_border = BorderFactory.createMatteBorder(0,0,2,0,new Color(153,153,255));
+    
     public Form_Dashboard() {
         initComponents();
         //center form
@@ -27,11 +34,21 @@ public final class Form_Dashboard extends javax.swing.JFrame {
         //jLabel_cars_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/auto.png")));
         //jLabel_customers_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/person.png")));
         //jLabel_booked_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/calendar.png")));
+        
         //methode 2 olso 
         displayImage(jLabel_cars_Logo.getWidth(),jLabel_cars_Logo.getHeight(),"images/auto.png",jLabel_cars_Logo);
         displayImage(jLabel_customers_Logo.getWidth(),jLabel_customers_Logo.getHeight(),"images/person.png",jLabel_customers_Logo);
         displayImage(jLabel_booked_Logo.getWidth(),jLabel_booked_Logo.getHeight(),"images/calendar.png",jLabel_booked_Logo);
+        //displayImage(jLabel_userProfil_Logo.getWidth(),jLabel_userProfil_Logo.getHeight(),"images/person.png",jLabel_userProfil_Logo);
         displayImage(jLabel_userProfil_Logo.getWidth(),jLabel_userProfil_Logo.getHeight(),"images/person.png",jLabel_userProfil_Logo);
+        
+        //set borders
+        jLabel_Brand.setBorder(empty_border);
+        jLabel_Cars.setBorder(empty_border);
+        jLabel_Location.setBorder(empty_border);
+        jLabel_customers.setBorder(empty_border);
+        jLabel_BookCar.setBorder(empty_border);
+        jLabel_Users.setBorder(empty_border);
             }
     public void displayImage (int width, int height, String image_path, JLabel label){
         //get the image
@@ -57,8 +74,9 @@ public final class Form_Dashboard extends javax.swing.JFrame {
         jLabel_Cars = new javax.swing.JLabel();
         jLabel_Location = new javax.swing.JLabel();
         jLabel_Brand = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel_BookCar = new javax.swing.JLabel();
         jLabel_customers = new javax.swing.JLabel();
+        jLabel_Users = new javax.swing.JLabel();
         jLabel_close = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -97,6 +115,12 @@ public final class Form_Dashboard extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel_CarsMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel_CarsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel_CarsMouseExited(evt);
+            }
         });
 
         jLabel_Location.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
@@ -106,6 +130,12 @@ public final class Form_Dashboard extends javax.swing.JFrame {
         jLabel_Location.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel_LocationMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel_LocationMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel_LocationMouseExited(evt);
             }
         });
 
@@ -117,11 +147,29 @@ public final class Form_Dashboard extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel_BrandMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel_BrandMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel_BrandMouseExited(evt);
+            }
         });
 
-        jLabel4.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Menu Item 1");
+        jLabel_BookCar.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
+        jLabel_BookCar.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_BookCar.setText("Book a Car");
+        jLabel_BookCar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_BookCar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_BookCarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel_BookCarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel_BookCarMouseExited(evt);
+            }
+        });
 
         jLabel_customers.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
         jLabel_customers.setForeground(new java.awt.Color(255, 255, 255));
@@ -130,6 +178,28 @@ public final class Form_Dashboard extends javax.swing.JFrame {
         jLabel_customers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel_customersMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel_customersMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel_customersMouseExited(evt);
+            }
+        });
+
+        jLabel_Users.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
+        jLabel_Users.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_Users.setText("Users");
+        jLabel_Users.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_Users.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_UsersMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel_UsersMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel_UsersMouseExited(evt);
             }
         });
 
@@ -141,12 +211,14 @@ public final class Form_Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_Cars, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel_Location, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
                     .addComponent(jLabel_customers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_Brand, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel_BookCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_Location, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel_Users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,8 +232,10 @@ public final class Form_Dashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel_customers, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addComponent(jLabel_BookCar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel_Users, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(190, Short.MAX_VALUE))
         );
 
         jLabel_close.setFont(new java.awt.Font("Verdana", 0, 48)); // NOI18N
@@ -463,6 +537,76 @@ public final class Form_Dashboard extends javax.swing.JFrame {
          frm_brd.setVisible(true);
     }//GEN-LAST:event_jLabel_customersMouseClicked
 
+    private void jLabel_BrandMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BrandMouseEntered
+        // set white border : 
+        jLabel_Brand.setBorder(white_border);
+    }//GEN-LAST:event_jLabel_BrandMouseEntered
+
+    private void jLabel_BrandMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BrandMouseExited
+        // set empty border
+        jLabel_Brand.setBorder(empty_border);
+    }//GEN-LAST:event_jLabel_BrandMouseExited
+
+    private void jLabel_CarsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_CarsMouseEntered
+        // set white border : 
+        jLabel_Cars.setBorder(white_border);
+    }//GEN-LAST:event_jLabel_CarsMouseEntered
+
+    private void jLabel_CarsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_CarsMouseExited
+        // set empty border
+        jLabel_Cars.setBorder(empty_border);
+    }//GEN-LAST:event_jLabel_CarsMouseExited
+
+    private void jLabel_LocationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_LocationMouseEntered
+        // set white border : 
+        jLabel_Location.setBorder(white_border);
+    }//GEN-LAST:event_jLabel_LocationMouseEntered
+
+    private void jLabel_LocationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_LocationMouseExited
+        // set empty border
+        jLabel_Location.setBorder(empty_border);
+    }//GEN-LAST:event_jLabel_LocationMouseExited
+
+    private void jLabel_customersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_customersMouseEntered
+        // set white border : 
+        jLabel_customers.setBorder(white_border);
+    }//GEN-LAST:event_jLabel_customersMouseEntered
+
+    private void jLabel_customersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_customersMouseExited
+        // set empty border
+        jLabel_customers.setBorder(empty_border);
+    }//GEN-LAST:event_jLabel_customersMouseExited
+
+    private void jLabel_BookCarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BookCarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel_BookCarMouseClicked
+
+    private void jLabel_BookCarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BookCarMouseEntered
+        // set white border : 
+        jLabel_BookCar.setBorder(white_border);
+    }//GEN-LAST:event_jLabel_BookCarMouseEntered
+
+    private void jLabel_BookCarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BookCarMouseExited
+        // set empty border
+        jLabel_BookCar.setBorder(empty_border);
+    }//GEN-LAST:event_jLabel_BookCarMouseExited
+
+    private void jLabel_UsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_UsersMouseClicked
+        // open the Customers form
+        Form_Users user_brd = new Form_Users();
+         user_brd.setVisible(true);
+    }//GEN-LAST:event_jLabel_UsersMouseClicked
+
+    private void jLabel_UsersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_UsersMouseEntered
+        // set white border : 
+        jLabel_Users.setBorder(white_border);
+    }//GEN-LAST:event_jLabel_UsersMouseEntered
+
+    private void jLabel_UsersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_UsersMouseExited
+        // set empty border
+        jLabel_Users.setBorder(empty_border);
+    }//GEN-LAST:event_jLabel_UsersMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -501,11 +645,12 @@ public final class Form_Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel_BookCar;
     private javax.swing.JLabel jLabel_Brand;
     private javax.swing.JLabel jLabel_Cars;
     private javax.swing.JLabel jLabel_Location;
+    private javax.swing.JLabel jLabel_Users;
     private javax.swing.JLabel jLabel_booked_Logo;
     private javax.swing.JLabel jLabel_booked_count;
     private javax.swing.JLabel jLabel_cars_Logo;
@@ -515,7 +660,7 @@ public final class Form_Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_customers_Logo;
     private javax.swing.JLabel jLabel_customers_Logo1;
     private javax.swing.JLabel jLabel_customers_count;
-    private javax.swing.JLabel jLabel_userProfil_Logo;
+    public static javax.swing.JLabel jLabel_userProfil_Logo;
     public static javax.swing.JLabel jLabel_username;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

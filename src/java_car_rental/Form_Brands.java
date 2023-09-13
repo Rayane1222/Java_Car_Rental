@@ -292,6 +292,15 @@ public class Form_Brands extends javax.swing.JFrame {
 
         jLabel_logo.setBackground(new java.awt.Color(102, 255, 102));
         jLabel_logo.setOpaque(true);
+        jLabel_logo.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabel_logoAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         jButton_browse.setText("Browse");
         jButton_browse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -667,6 +676,10 @@ public class Form_Brands extends javax.swing.JFrame {
         index = brands_list.size()-1;
         displayBrand(index);
     }//GEN-LAST:event_jButton_LastActionPerformed
+
+    private void jLabel_logoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel_logoAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel_logoAncestorAdded
 
     /**
      * @param args the command line arguments

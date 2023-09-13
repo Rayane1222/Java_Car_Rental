@@ -652,6 +652,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Automatic"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton_Gear_AutomaticActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButton_Gear_Manuel">
               <Properties>

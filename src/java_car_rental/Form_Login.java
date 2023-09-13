@@ -5,12 +5,15 @@
 package java_car_rental;
 
 import java.awt.Color;
+import java.awt.Image;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java_car_rental.classes.DB;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 
 
@@ -41,6 +44,16 @@ public class Form_Login extends javax.swing.JFrame {
         Border title_border = BorderFactory.createMatteBorder(0,0,3,0,Color.yellow);
         jLabel_title.setBorder(title_border);
     }
+    
+    public void displayImage (int width, int height, byte[] image_byte, JLabel label){
+        //get the image
+        ImageIcon imageIco = new ImageIcon(image_byte);
+        //resize the image
+        Image image = imageIco.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        //set the image into the jlabel
+        label.setIcon(new ImageIcon(image));
+    }
+    
 //
     /**
      * This method is called from within the constructor to initialize the form.
@@ -239,6 +252,7 @@ public class Form_Login extends javax.swing.JFrame {
                     ps = DB.getConnection().prepareStatement(query);
                     ps.setString(1,username);
                     ps.setString(2,password);
+                   
                     rs = ps.executeQuery();
 
                         if(rs.next())
@@ -249,6 +263,8 @@ public class Form_Login extends javax.swing.JFrame {
                             frm_dsh.setVisible(true);
                             //display the username
                             Form_Dashboard.jLabel_username.setText(rs.getString("username"));
+                            //Form_Dashboard.jLabel_userProfil_Logo.setText(rs.getString("username"));
+                            displayImage(Form_Dashboard.jLabel_userProfil_Logo.getWidth(), Form_Dashboard.jLabel_userProfil_Logo.getHeight(), rs.getBytes("image"),Form_Dashboard.jLabel_userProfil_Logo);
                             //hide the login form
                             this.dispose();
                         }

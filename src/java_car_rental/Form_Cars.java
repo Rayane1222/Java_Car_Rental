@@ -335,6 +335,11 @@ public class Form_Cars extends javax.swing.JFrame {
         });
 
         jRadioButton_Gear_Automatic.setText("Automatic");
+        jRadioButton_Gear_Automatic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton_Gear_AutomaticActionPerformed(evt);
+            }
+        });
 
         jRadioButton_Gear_Manuel.setText("Manuel");
 
@@ -721,7 +726,7 @@ public class Form_Cars extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_EditActionPerformed
 
     private void jButton_SearchByIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SearchByIdActionPerformed
-        // Search car By id:
+            // Search car By id:
         
         int car_id = (int) jSpinner_id.getValue();
         Car new_car = car.getCarById(car_id);
@@ -760,6 +765,10 @@ public class Form_Cars extends javax.swing.JFrame {
             if(new_car.getSunroof().equals("yes")){jCheckBox_Features_Sunroof.setSelected(true);  }
         }
     }//GEN-LAST:event_jButton_SearchByIdActionPerformed
+
+    private void jRadioButton_Gear_AutomaticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_Gear_AutomaticActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton_Gear_AutomaticActionPerformed
 
     /**
      * @param args the command line arguments

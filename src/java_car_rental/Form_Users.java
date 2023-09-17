@@ -614,6 +614,8 @@ public class Form_Users extends javax.swing.JFrame {
     private void jLabel_close2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_close2MouseClicked
         // close the form when clicked
         this.dispose();
+        Form_Dashboard frm_brd = new Form_Dashboard();
+         frm_brd.setVisible(true);
     }//GEN-LAST:event_jLabel_close2MouseClicked
 
     private void jTable_UsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_UsersMouseClicked

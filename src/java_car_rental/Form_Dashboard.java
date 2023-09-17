@@ -540,24 +540,28 @@ public final class Form_Dashboard extends javax.swing.JFrame {
         // open the brands form
          Form_Brands frm_brd = new Form_Brands();
          frm_brd.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_jLabel_BrandMouseClicked
 
     private void jLabel_CarsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_CarsMouseClicked
         // open the Cars form
         Form_Cars frm_crs = new Form_Cars();
          frm_crs.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_jLabel_CarsMouseClicked
 
     private void jLabel_LocationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_LocationMouseClicked
         // open the Location form
         Form_Locations frm_brd = new Form_Locations();
          frm_brd.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_jLabel_LocationMouseClicked
 
     private void jLabel_customersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_customersMouseClicked
         // open the Customers form
         Form_Customers frm_brd = new Form_Customers();
          frm_brd.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_jLabel_customersMouseClicked
 
     private void jLabel_BrandMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BrandMouseEntered
@@ -604,6 +608,7 @@ public final class Form_Dashboard extends javax.swing.JFrame {
         // open the Book Car form
         Form_BookCar Book_brd = new Form_BookCar();
          Book_brd.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_jLabel_BookCarMouseClicked
 
     private void jLabel_BookCarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BookCarMouseEntered
@@ -620,6 +625,7 @@ public final class Form_Dashboard extends javax.swing.JFrame {
         // open the Customers form
         Form_Users user_brd = new Form_Users();
          user_brd.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_jLabel_UsersMouseClicked
 
     private void jLabel_UsersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_UsersMouseEntered

@@ -537,6 +537,8 @@ public class Form_Customers extends javax.swing.JFrame {
     private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
         // close the form when clicked
         this.dispose();
+        Form_Dashboard frm_brd = new Form_Dashboard();
+         frm_brd.setVisible(true);
 
     }//GEN-LAST:event_jLabel_closeMouseClicked
 
@@ -683,8 +685,10 @@ public class Form_Customers extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_CleanActionPerformed
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        // close the form when clicked
         this.dispose();
+        Form_Dashboard frm_brd = new Form_Dashboard();
+         frm_brd.setVisible(true);
+        
     }//GEN-LAST:event_jLabel10MouseClicked
 
     /**

@@ -456,6 +456,8 @@ public class Form_Locations extends javax.swing.JFrame {
     private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
         // close the form when clicked
         this.dispose();
+        Form_Dashboard frm_brd = new Form_Dashboard();
+         frm_brd.setVisible(true);
 
     }//GEN-LAST:event_jLabel_closeMouseClicked
 

@@ -421,8 +421,9 @@ public class Form_CarsImages extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
-        // close the form when clicked
-        this.dispose();
+        Form_Cars frm_crs = new Form_Cars();
+         frm_crs.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_jLabel_closeMouseClicked
 
     private void jTable_CarsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_CarsMouseClicked

@@ -794,8 +794,9 @@ public class Form_Booking_Edit_Remove extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel_close2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_close2MouseClicked
-        // close the form when clicked
-        this.dispose();
+        Form_BookCar Book_brd = new Form_BookCar();
+         Book_brd.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_jLabel_close2MouseClicked
 
     private void jComboBox_BrandsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_BrandsActionPerformed

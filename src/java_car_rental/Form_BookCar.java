@@ -724,6 +724,8 @@ public class Form_BookCar extends javax.swing.JFrame {
     private void jLabel_close2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_close2MouseClicked
         // close the form when clicked
         this.dispose();
+        Form_Dashboard frm_brd = new Form_Dashboard();
+         frm_brd.setVisible(true);
     }//GEN-LAST:event_jLabel_close2MouseClicked
 
     private void jButton_select_customerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_select_customerActionPerformed
@@ -829,7 +831,10 @@ public class Form_BookCar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Enter a Valid Model and Class - Make sure to Enter all the info","invalid info ",2);
         } catch (ParseException ex) {
             Logger.getLogger(Form_BookCar.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (Exception ex){
+            JOptionPane.showMessageDialog(null,"Enter a Valid Model and Class - Make sure to Enter all the info","invalid info ",2);
         }
+        
     }//GEN-LAST:event_jButton_BookCar_ActionPerformed
 
     private void jButton_BookingListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BookingListActionPerformed
@@ -847,6 +852,7 @@ public class Form_BookCar extends javax.swing.JFrame {
         
         Form_Booking_Edit_Remove bookingEditRemove_frm = new Form_Booking_Edit_Remove();
         bookingEditRemove_frm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton_Edit_Remove_BookingActionPerformed
 
     private void jButton_CalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CalcActionPerformed

@@ -590,6 +590,8 @@ public class Form_Cars extends javax.swing.JFrame {
     private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
         // close the form when clicked
         this.dispose();
+        Form_Dashboard frm_brd = new Form_Dashboard();
+         frm_brd.setVisible(true);
     }//GEN-LAST:event_jLabel_closeMouseClicked
 
     private void jButton_Add_CarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Add_CarActionPerformed
@@ -634,6 +636,7 @@ public class Form_Cars extends javax.swing.JFrame {
          // open the Form_CarsImages
          Form_CarsImages frm_carImg = new Form_CarsImages();
          frm_carImg.setVisible(true);
+         this.dispose();
         
     }//GEN-LAST:event_jButton_Add_ImagesActionPerformed
 

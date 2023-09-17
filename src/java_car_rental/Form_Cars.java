@@ -4,11 +4,14 @@
  */
 package java_car_rental;
 
+import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 import java_car_rental.classes.Car;
 import java_car_rental.classes.brand_Cls;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
@@ -42,9 +45,18 @@ public class Form_Cars extends javax.swing.JFrame {
         //populate comboBox with brands
         populateComboboxBrands();
         
+        displayImage(jLabel_brands_logo.getWidth(),jLabel_brands_logo.getHeight(),getClass().getResource("images/automobile.png").getFile(),jLabel_brands_logo);
+        
     }
     
-    
+    public void displayImage (int width, int height, String image_path, JLabel label){
+        //get the image
+        ImageIcon imageIco = new ImageIcon(image_path);
+        //resize the image
+        Image image = imageIco.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        //set the image into the jlabel
+        label.setIcon(new ImageIcon(image));
+    }
     
     //create a function to populate the jcombobox with brands   
     //and to do that we will use a ***hashmap*** 
@@ -178,24 +190,24 @@ public class Form_Cars extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_brands_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(294, 294, 294)
+                .addGap(66, 66, 66)
+                .addComponent(jLabel_brands_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(246, 246, 246)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
                 .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(jLabel_brands_logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel_brands_logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
@@ -740,6 +752,7 @@ public class Form_Cars extends javax.swing.JFrame {
         }
         if(new_car!=null)
         {
+            jSpinner_id.setValue(car_id);
             jComboBox_brand.setSelectedItem(map.get(new_car.getBrand()));
             jTextField_model.setText(new_car.getModel());
             jLabel_brand_id.setText(String.valueOf(new_car.getBrand()));

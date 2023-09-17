@@ -478,6 +478,7 @@ public class Form_CarsImages extends javax.swing.JFrame {
             {
 
                     car.removeCarImage(image_id);
+                    jTable_Car_ImagesMouseClicked(null);
 
             }
         }catch (Exception ex) 
@@ -487,12 +488,20 @@ public class Form_CarsImages extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_Remove_ImageActionPerformed
 
     private void jButton_images_SlidersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_images_SlidersActionPerformed
+        
+        try {
+        
         // Show images (for the selected car ) slider :
         // get the selected car Image
         int index = jTable_Cars.getSelectedRow();
         int id =Integer.parseInt(jTable_Cars.getValueAt(index, 0).toString());//car id
         Form_CarImages_Slider slider = new Form_CarImages_Slider(id);
         slider.setVisible(true);
+        
+        }catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null , "Select the Car"," Car Image ",2);
+        }
     }//GEN-LAST:event_jButton_images_SlidersActionPerformed
 
     private void jButton_Add_ImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Add_ImageActionPerformed

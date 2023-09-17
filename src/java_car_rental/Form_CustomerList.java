@@ -8,7 +8,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java_car_rental.classes.brand_Cls;
+import java_car_rental.classes.Customer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,25 +18,27 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author mac
  */
-public class Form_BrandsList extends javax.swing.JFrame {
+public class Form_CustomerList extends javax.swing.JFrame {
 
+    Customer customer = new Customer();
+    ArrayList<Customer> customer_list = customer.CustomerList();
+    String originaform;
+    
     /**
-     * Creates new form Form_BrandsList
+     * Creates new form Form_CustomerList
      */
-    
-    brand_Cls brand = new brand_Cls();
-    ArrayList<brand_Cls> brands_list = brand.brandsList();
-    
-    public Form_BrandsList() {
+    public Form_CustomerList(String add_or_edit) {
+        
         initComponents();
         
         //center the form
         this.setLocationRelativeTo(null) ;
         
-        //populate jtable 
-        populateJtableWithBrands();
+        populateJtableWithCustomers();
         
-        jTable_Brands.setRowHeight(50);
+        jTable_Customers.setRowHeight(40);
+        
+        originaform = add_or_edit ;
         displayImage(jLabel_list_logo.getWidth(),jLabel_list_logo.getHeight(),getClass().getResource("images/list.png").getFile(),jLabel_list_logo);
 
         }
@@ -50,48 +52,33 @@ public class Form_BrandsList extends javax.swing.JFrame {
             label.setIcon(new ImageIcon(image));
         }
     
-     //create a function to populate the jtable whith brand(id & name )
-    
-    public void populateJtableWithBrands()
+    public void populateJtableWithCustomers()
     {
         //clear array list 
-        brands_list.clear();
+        customer_list.clear();
         //populate arraylist
-        brands_list = brand.brandsList();   
+        customer_list = customer.CustomerList();   
         //jtable columns
-        String[] columnsName = {"ID","Name"};
+        String[] columnsName = {"ID","Name","Phone","Email"};
         
         //jtable rows 
-        Object[][] rows = new Object[brands_list.size()][columnsName.length];
+        Object[][] rows = new Object[customer_list.size()][columnsName.length];
         
-        for(int i=0;i<brands_list.size();i++)
+        for(int i=0;i<customer_list.size();i++)
         {
-            rows[i][0]  =brands_list.get(i).getId();
-            rows[i][1]  =brands_list.get(i).getName(); 
+            rows[i][0]  =customer_list.get(i).getId();
+            rows[i][1]  =customer_list.get(i).getFullname(); 
+            rows[i][2]  =customer_list.get(i).getPhone(); 
+            rows[i][3]  =customer_list.get(i).getEmail(); 
+          
             
             
         }
         
         DefaultTableModel model = new DefaultTableModel(rows,columnsName);
-        jTable_Brands.setModel(model);
+        jTable_Customers.setModel(model);
         
     }
-    
-     public void displayByteImage(int width, int height, byte[] image_byte, JLabel label) {
-    if (image_byte != null) { // Check if the image_byte is not null
-        // Get the image
-        ImageIcon imageIco = new ImageIcon(image_byte);
-
-        // Resize the image
-        Image image = imageIco.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-
-        // Set the image into the JLabel
-        label.setIcon(new ImageIcon(image));
-    } else {
-        // Handle the case where image_byte is null (e.g., display a default image)
-        label.setIcon(null); // Clear the label's icon
-    }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,9 +96,8 @@ public class Form_BrandsList extends javax.swing.JFrame {
         jLabel_list_logo = new javax.swing.JLabel();
         jLabel_close = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_Brands = new javax.swing.JTable();
-        jButton_Brand_Cars = new javax.swing.JButton();
-        jLabel_brand_logo = new javax.swing.JLabel();
+        jTable_Customers = new javax.swing.JTable();
+        jButton_select_customer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,7 +110,7 @@ public class Form_BrandsList extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("All Brands");
+        jLabel4.setText("All Customers");
 
         jLabel_close.setFont(new java.awt.Font("Verdana", 0, 48)); // NOI18N
         jLabel_close.setForeground(new java.awt.Color(255, 255, 255));
@@ -142,11 +128,11 @@ public class Form_BrandsList extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(81, 81, 81)
                 .addComponent(jLabel_list_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(211, 211, 211)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 265, Short.MAX_VALUE)
+                .addGap(269, 269, 269)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 385, Short.MAX_VALUE)
                 .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -162,8 +148,8 @@ public class Form_BrandsList extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jTable_Brands.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jTable_Brands.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Customers.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jTable_Customers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -174,27 +160,21 @@ public class Form_BrandsList extends javax.swing.JFrame {
 
             }
         ));
-        jTable_Brands.setSelectionBackground(new java.awt.Color(0, 204, 153));
-        jTable_Brands.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable_Customers.setSelectionBackground(new java.awt.Color(0, 204, 153));
+        jTable_Customers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable_BrandsMouseClicked(evt);
+                jTable_CustomersMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable_Brands);
+        jScrollPane1.setViewportView(jTable_Customers);
 
-        jButton_Brand_Cars.setBackground(new java.awt.Color(255, 102, 0));
-        jButton_Brand_Cars.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
-        jButton_Brand_Cars.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_Brand_Cars.setText("Display This Brand Cars");
-        jButton_Brand_Cars.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton_Brand_Cars.addActionListener(new java.awt.event.ActionListener() {
+        jButton_select_customer.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jButton_select_customer.setText("Select Customer");
+        jButton_select_customer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Brand_CarsActionPerformed(evt);
+                jButton_select_customerActionPerformed(evt);
             }
         });
-
-        jLabel_brand_logo.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel_brand_logo.setOpaque(true);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -202,29 +182,24 @@ public class Form_BrandsList extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel_brand_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton_Brand_Cars, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1030, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(374, 374, 374)
+                        .addComponent(jButton_select_customer, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel_brand_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jButton_Brand_Cars, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_select_customer)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -261,37 +236,46 @@ public class Form_BrandsList extends javax.swing.JFrame {
     private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
         // close the form when clicked
         this.dispose();
+        
     }//GEN-LAST:event_jLabel_closeMouseClicked
 
-    private void jTable_BrandsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_BrandsMouseClicked
-                                               
-        // get the selected rand 
-        int index = jTable_Brands.getSelectedRow();
-        int id =Integer.parseInt(jTable_Brands.getValueAt(index, 0).toString());
-        brand_Cls brd= brand.getBrandById(id);
-        displayByteImage(jLabel_brand_logo.getWidth(), jLabel_brand_logo.getHeight(), brd.getLogo(),jLabel_brand_logo);
-        
-        
+    private void jTable_CustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_CustomersMouseClicked
 
-    }//GEN-LAST:event_jTable_BrandsMouseClicked
+        // get the selected rand
 
-    private void jButton_Brand_CarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Brand_CarsActionPerformed
+         
+//        index = jTable_Customers.getSelectedRow();
+//        int id =Integer.parseInt(jTable_Customers.getValueAt(index, 0).toString());
+//        String fullname = jTable_Customers.getValueAt(index, 1).toString();
+//        //String birthdate = jTable_Customers.getValueAt(index, 2).toString();
+//        String phone = jTable_Customers.getValueAt(index, 3).toString();
+//        String email = jTable_Customers.getValueAt(index, 4).toString();
+//        String address = jTable_Customers.getValueAt(index, 5).toString();
+
+    }//GEN-LAST:event_jTable_CustomersMouseClicked
+
+    private void jButton_select_customerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_select_customerActionPerformed
         
-        try{
         
-        // show this  brand cars
-         int index = jTable_Brands.getSelectedRow();
-        int id =Integer.parseInt(jTable_Brands.getValueAt(index, 0).toString());
-        Form_CarListByBrands frm_crs_brd = new Form_CarListByBrands(id,"");
-        frm_crs_brd.setVisible(true);
+            // get the selected customer :
+            int index =jTable_Customers.getSelectedRow();
+            String id =jTable_Customers.getValueAt(index, 0).toString();
+            String fullname = jTable_Customers.getValueAt(index, 1).toString();
+
+            //set the customer id & name in the book a car form 
+            if(originaform.equals("add"))
+            {
+                Form_BookCar.displayCustomers(id, fullname);
+            }
+            else if(originaform.equals("edit"))
+            {
+                Form_Booking_Edit_Remove.displayCustomer(id, fullname);
+            }
+
+            //close this form
+            this.dispose();
         
-        }catch(Exception ex)
-        {
-             Logger.getLogger(Form_BrandsList.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null , "PLZ Select a Brand","Not Selected ",1);
-        }
-        
-    }//GEN-LAST:event_jButton_Brand_CarsActionPerformed
+    }//GEN-LAST:event_jButton_select_customerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,34 +294,33 @@ public class Form_BrandsList extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Form_BrandsList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Form_CustomerList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Form_BrandsList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Form_CustomerList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Form_BrandsList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Form_CustomerList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Form_BrandsList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Form_CustomerList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Form_BrandsList().setVisible(true);
+                new Form_CustomerList("").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_Brand_Cars;
+    private javax.swing.JButton jButton_select_customer;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel_brand_logo;
     private javax.swing.JLabel jLabel_close;
     private javax.swing.JLabel jLabel_list_logo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable_Brands;
+    private javax.swing.JTable jTable_Customers;
     // End of variables declaration//GEN-END:variables
 }

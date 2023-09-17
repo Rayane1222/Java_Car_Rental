@@ -198,6 +198,25 @@ public class Location {
     }
     
     
+    // create a function to get all Location depending of the city param and return  an arraylist
     
+    public ArrayList<Location> locationListByCity(String city)
+    {
+        ArrayList<Location> locList = new ArrayList<>();
+        
+        ResultSet rs = getData("SELECT * FROM `locations` WHERE `city` = '" + city + "'");
+        
+        try {
+            while(rs.next())
+            {
+             
+                Location location =new Location(rs.getInt(1),rs.getString(2),rs.getString(3));
+                locList.add(location);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Location.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return locList;
+    }
     
 }

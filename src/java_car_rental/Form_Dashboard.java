@@ -6,6 +6,10 @@ package java_car_rental;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.util.ArrayList;
+import java_car_rental.classes.Booking;
+import java_car_rental.classes.Car;
+import java_car_rental.classes.Customer;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -24,7 +28,18 @@ public final class Form_Dashboard extends javax.swing.JFrame {
     Border white_border = BorderFactory.createMatteBorder(0,0,2,0,Color.white);
     Border empty_border = BorderFactory.createMatteBorder(0,0,2,0,new Color(153,153,255));
     
-    public Form_Dashboard() {
+    //classes
+    Car car = new Car();
+    Booking booking = new Booking();
+    Customer customer = new Customer();
+    
+    //arraylists
+    ArrayList<Car> carslist = car.carsList();
+    ArrayList<Booking> bookinglist = booking.BookingList();
+    ArrayList<Customer> customerlist = customer.CustomerList();
+    
+    public Form_Dashboard() 
+    {
         initComponents();
         //center form
         this.setLocationRelativeTo(null) ;
@@ -37,10 +52,10 @@ public final class Form_Dashboard extends javax.swing.JFrame {
         
         //methode 2 olso 
         displayImage(jLabel_cars_Logo.getWidth(),jLabel_cars_Logo.getHeight(),"images/auto.png",jLabel_cars_Logo);
-        displayImage(jLabel_customers_Logo.getWidth(),jLabel_customers_Logo.getHeight(),"images/person.png",jLabel_customers_Logo);
+        displayImage(jLabel_customers_Logo.getWidth(),jLabel_customers_Logo.getHeight(),"images/person-.png",jLabel_customers_Logo);
         displayImage(jLabel_booked_Logo.getWidth(),jLabel_booked_Logo.getHeight(),"images/calendar.png",jLabel_booked_Logo);
         //displayImage(jLabel_userProfil_Logo.getWidth(),jLabel_userProfil_Logo.getHeight(),"images/person.png",jLabel_userProfil_Logo);
-        displayImage(jLabel_userProfil_Logo.getWidth(),jLabel_userProfil_Logo.getHeight(),"images/person.png",jLabel_userProfil_Logo);
+        //displayImage(jLabel_userProfil_Logo.getWidth(),jLabel_userProfil_Logo.getHeight(),"images/person.png",jLabel_userProfil_Logo);
         
         //set borders
         jLabel_Brand.setBorder(empty_border);
@@ -49,7 +64,15 @@ public final class Form_Dashboard extends javax.swing.JFrame {
         jLabel_customers.setBorder(empty_border);
         jLabel_BookCar.setBorder(empty_border);
         jLabel_Users.setBorder(empty_border);
-            }
+        
+        
+        //show count
+        jLabel_cars_count.setText(String.valueOf(carslist.size()));
+        jLabel_customers_count.setText(String.valueOf(customerlist.size()));
+        jLabel_booked_count.setText(String.valueOf(bookinglist.size()));
+        
+        
+     }
     public void displayImage (int width, int height, String image_path, JLabel label){
         //get the image
         ImageIcon imageIco = new ImageIcon(getClass().getResource(image_path));
@@ -578,7 +601,9 @@ public final class Form_Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_customersMouseExited
 
     private void jLabel_BookCarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BookCarMouseClicked
-        // TODO add your handling code here:
+        // open the Book Car form
+        Form_BookCar Book_brd = new Form_BookCar();
+         Book_brd.setVisible(true);
     }//GEN-LAST:event_jLabel_BookCarMouseClicked
 
     private void jLabel_BookCarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BookCarMouseEntered
@@ -650,7 +675,7 @@ public final class Form_Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Brand;
     private javax.swing.JLabel jLabel_Cars;
     private javax.swing.JLabel jLabel_Location;
-    private javax.swing.JLabel jLabel_Users;
+    public static javax.swing.JLabel jLabel_Users;
     private javax.swing.JLabel jLabel_booked_Logo;
     private javax.swing.JLabel jLabel_booked_count;
     private javax.swing.JLabel jLabel_cars_Logo;

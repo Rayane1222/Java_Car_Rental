@@ -43,6 +43,19 @@ public class Form_Login extends javax.swing.JFrame {
         //create border 
         Border title_border = BorderFactory.createMatteBorder(0,0,3,0,Color.yellow);
         jLabel_title.setBorder(title_border);
+        displayImages(jLabel_user.getWidth(),jLabel_user.getHeight(),getClass().getResource("images/person.png").getFile(),jLabel_user);
+        displayImages(jLabel_pass.getWidth(),jLabel_pass.getHeight(),getClass().getResource("images/pass.png").getFile(),jLabel_pass);
+        System.out.println(getClass().getResource("images/person.png").getFile());
+        
+    }
+    
+    public void displayImages (int width, int height, String image_path, JLabel label){
+        //get the image
+        ImageIcon imageIco = new ImageIcon(image_path);
+        //resize the image
+        Image image = imageIco.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        //set the image into the jlabel
+        label.setIcon(new ImageIcon(image));
     }
     
     public void displayImage (int width, int height, byte[] image_byte, JLabel label){
@@ -88,7 +101,8 @@ public class Form_Login extends javax.swing.JFrame {
         jLabel_title.setFont(new java.awt.Font("Trebuchet MS", 1, 55)); // NOI18N
         jLabel_title.setText("Login");
 
-        jLabel_user.setBackground(new java.awt.Color(255, 51, 51));
+        jLabel_user.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel_user.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_user.setOpaque(true);
 
         jTextField_username.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -108,7 +122,7 @@ public class Form_Login extends javax.swing.JFrame {
             }
         });
 
-        jLabel_pass.setBackground(new java.awt.Color(255, 51, 51));
+        jLabel_pass.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_pass.setOpaque(true);
 
         jCheckBox_password.setText("Show Password");
@@ -164,18 +178,18 @@ public class Form_Login extends javax.swing.JFrame {
                             .addComponent(jLabel_title, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
+                                .addComponent(jButton_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel_user, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                                    .addComponent(jLabel_pass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jLabel_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                                            .addComponent(jLabel_user, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField_username, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jCheckBox_password)
-                                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                    .addComponent(jTextField_username, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jCheckBox_password)
+                                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap(51, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -187,12 +201,12 @@ public class Form_Login extends javax.swing.JFrame {
                 .addComponent(jLabel_title)
                 .addGap(49, 49, 49)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel_user, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(jTextField_username))
+                    .addComponent(jLabel_user, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField_username, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1))
+                    .addComponent(jLabel_pass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
                 .addGap(19, 19, 19)
                 .addComponent(jCheckBox_password)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -261,6 +275,12 @@ public class Form_Login extends javax.swing.JFrame {
                             //display dashboard form
                             Form_Dashboard frm_dsh = new Form_Dashboard();
                             frm_dsh.setVisible(true);
+                            
+                            if (rs.getString("user_type").equals("user"))
+                            {
+                                frm_dsh.jLabel_Users.setVisible(false);
+                            }
+                            
                             //display the username
                             Form_Dashboard.jLabel_username.setText(rs.getString("username"));
                             //Form_Dashboard.jLabel_userProfil_Logo.setText(rs.getString("username"));

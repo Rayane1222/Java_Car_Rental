@@ -276,6 +276,7 @@ public class Car {
                 JOptionPane.showMessageDialog(null , "Car Not Added","ADD Car ",2);
                  
             }
+           
         } catch (SQLException ex) {
             Logger.getLogger(Car.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -320,6 +321,7 @@ public class Car {
                     
                     
                 }
+                
             } catch (SQLException ex) {
                 Logger.getLogger(Car.class.getName()).log(Level.SEVERE, null, ex);
                 System.err.println("Error: " + ex.getMessage()); // Print the error message
@@ -342,6 +344,7 @@ public class Car {
             JOptionPane.showMessageDialog(null , "Car Not removed","Delete Car ",2);
            
         }
+        
     } catch (SQLException ex) {
         ex.printStackTrace();   
         Logger.getLogger(Car.class.getName()).log(Level.SEVERE, null, ex);
@@ -355,7 +358,6 @@ public class Car {
         String insertQuery = "INSERT INTO 'car_images'('car_id','c_image') VALUES (?,?)";
         
         PreparedStatement ps;
-        ResultSet rs;
         try {
             
             ps = DB.getConnection().prepareStatement(insertQuery);
@@ -369,6 +371,7 @@ public class Car {
                 JOptionPane.showMessageDialog(null , "Car Image Not Added","ADD Car Image ",2);
                  //System.out.println("Locations Not Added");
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(Car.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -391,6 +394,7 @@ public class Car {
             JOptionPane.showMessageDialog(null , "Car Image Not removed","Delete Car Image ",2);
            
         }
+        
     } catch (SQLException ex) {
         ex.printStackTrace();   
         JOptionPane.showMessageDialog(null , "Select the Car Image","Delete Car Image ",2);
@@ -503,6 +507,7 @@ public class Car {
                 } else {
                     System.out.println("Car not found for ID: " + car_id);
                 }
+                
             } catch (SQLException ex) {
                 // Log the exception
                 ex.printStackTrace();
@@ -524,7 +529,28 @@ public class Car {
     
     
     
+    // create a function to get  cars by id 
     
+    public ArrayList<Car> carsByBrandList(int brand_id)
+    {
+        ArrayList<Car> carList = new ArrayList<>();
+        
+        ResultSet rs= getData("SELECT * FROM `cars` WHERE `brand`= " + brand_id);
+        
+        try {
+            while(rs.next())
+            {
+             
+                Car car =new Car(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7),
+                        rs.getString(8),rs.getInt(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),
+                        rs.getString(15),rs.getString(16),rs.getString(17));
+                carList.add(car);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Car.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return carList;
+    }
     
     
     

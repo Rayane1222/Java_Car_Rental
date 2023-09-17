@@ -84,8 +84,10 @@ public class brand_Cls {
                 JOptionPane.showMessageDialog(null , "Brand Not Added","ADD Brand ",2);
                  //System.out.println("Locations Not Added");
             }
+           
         } catch (SQLException ex) {
-            Logger.getLogger(brand_Cls.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(brand_Cls.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null , "Select a Smaller Size Image" + ex.getMessage(),"ADD Brand ",2);
         }
         
       
@@ -112,6 +114,7 @@ public class brand_Cls {
                     JOptionPane.showMessageDialog(null , "Brand Not Edited","Edit Brand ",2);
                     //System.out.println("Locations Not Edited");
                 }
+               
             } catch (Exception ex) {
             //Logger.getLogger(Form_Brands.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null , "Select the brand Logo [ "+ex.getMessage()+"]"," Brand Logo",1);
@@ -138,6 +141,7 @@ public class brand_Cls {
             JOptionPane.showMessageDialog(null , "Brand Not removed","Delete Brand ",2);
             //System.out.println("Locations Not removed");
         }
+        
     } catch (SQLException ex) {
         ex.printStackTrace();   
         Logger.getLogger(brand_Cls.class.getName()).log(Level.SEVERE, null, ex);
@@ -202,6 +206,7 @@ public class brand_Cls {
                 } else {
                     System.out.println("Brand not found for ID: " + brand_id);
                 }
+                ps.close();
             } catch (SQLException ex) {
                 // Log the exception
                 ex.printStackTrace();

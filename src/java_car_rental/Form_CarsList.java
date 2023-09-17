@@ -44,7 +44,18 @@ public class Form_CarsList extends javax.swing.JFrame {
         labels[3]=jLabel_car_Image_4;
         labels[4]=jLabel_car_Image_5;
         labels[5]=jLabel_car_Image_6;
-    }
+        displayImage(jLabel_list_logo.getWidth(),jLabel_list_logo.getHeight(),getClass().getResource("images/list.png").getFile(),jLabel_list_logo);
+
+        }
+
+        public void displayImage (int width, int height, String image_path, JLabel label){
+            //get the image
+            ImageIcon imageIco = new ImageIcon(image_path);
+            //resize the image
+            Image image = imageIco.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            //set the image into the jlabel
+            label.setIcon(new ImageIcon(image));
+        }
 
     //create a function to populate the jtable whith cars
     
@@ -117,7 +128,7 @@ public class Form_CarsList extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel_brands_logo = new javax.swing.JLabel();
+        jLabel_list_logo = new javax.swing.JLabel();
         jLabel_close = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_Cars = new javax.swing.JTable();
@@ -137,7 +148,7 @@ public class Form_CarsList extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel3.setBackground(new java.awt.Color(26, 188, 156));
+        jPanel3.setBackground(new java.awt.Color(255, 102, 0));
 
         jLabel4.setFont(new java.awt.Font("Verdana", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -160,24 +171,24 @@ public class Form_CarsList extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_brands_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(248, 248, 248)
+                .addGap(61, 61, 61)
+                .addComponent(jLabel_list_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(391, 391, 391)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 690, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(jLabel_brands_logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel_list_logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jTable_Cars.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -251,14 +262,13 @@ public class Form_CarsList extends javax.swing.JFrame {
                     .addComponent(jLabel_car_Image_2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel_car_Image_5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel_car_Image_4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_car_Image_5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_car_Image_4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_car_Image_6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jButton_ShowSliderForm_.setBackground(new java.awt.Color(22, 160, 133));
+        jButton_ShowSliderForm_.setBackground(new java.awt.Color(255, 102, 0));
         jButton_ShowSliderForm_.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
         jButton_ShowSliderForm_.setForeground(new java.awt.Color(255, 255, 255));
         jButton_ShowSliderForm_.setText("Images Slider");
@@ -277,7 +287,7 @@ public class Form_CarsList extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 989, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel_Car_Image, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -422,7 +432,6 @@ public class Form_CarsList extends javax.swing.JFrame {
     private javax.swing.JButton jButton_ShowSliderForm_;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_Car_Image;
-    private javax.swing.JLabel jLabel_brands_logo;
     private javax.swing.JLabel jLabel_car_Image_1;
     private javax.swing.JLabel jLabel_car_Image_2;
     private javax.swing.JLabel jLabel_car_Image_3;
@@ -430,6 +439,7 @@ public class Form_CarsList extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_car_Image_5;
     private javax.swing.JLabel jLabel_car_Image_6;
     private javax.swing.JLabel jLabel_close;
+    private javax.swing.JLabel jLabel_list_logo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

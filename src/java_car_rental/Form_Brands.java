@@ -598,7 +598,7 @@ public class Form_Brands extends javax.swing.JFrame {
                 {
                     logo = Files.readAllBytes(Paths.get(jLabel_imagePath.getText()));
                 }
-                if(verify("edit "))
+                if(verify("edit"))
                 {
                         brand_Cls brand = new brand_Cls();
                     

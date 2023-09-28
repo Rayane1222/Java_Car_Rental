@@ -274,7 +274,9 @@ public class Form_Login extends javax.swing.JFrame {
                             //System.out.println("Login");
                             //display dashboard form
                             Form_Dashboard frm_dsh = new Form_Dashboard();
+                            this.dispose();
                             frm_dsh.setVisible(true);
+                            
                             
                             if (rs.getString("user_type").equals("user"))
                             {
@@ -285,8 +287,9 @@ public class Form_Login extends javax.swing.JFrame {
                             Form_Dashboard.jLabel_username.setText(rs.getString("username"));
                             //Form_Dashboard.jLabel_userProfil_Logo.setText(rs.getString("username"));
                             displayImage(Form_Dashboard.jLabel_userProfil_Logo.getWidth(), Form_Dashboard.jLabel_userProfil_Logo.getHeight(), rs.getBytes("image"),Form_Dashboard.jLabel_userProfil_Logo);
-                            //hide the login form
-                            this.dispose();
+                          
+                            
+                            
                         }
                         else{
                             System.out.println("Invalid Username or Password");
@@ -300,7 +303,7 @@ public class Form_Login extends javax.swing.JFrame {
             
         }
         
-        
+     
         
         
     }//GEN-LAST:event_jButton_loginActionPerformed
@@ -312,6 +315,7 @@ public class Form_Login extends javax.swing.JFrame {
     private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
         // close the form when clicked
         System.exit(0);
+     
         
     }//GEN-LAST:event_jLabel_closeMouseClicked
 

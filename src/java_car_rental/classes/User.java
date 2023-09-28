@@ -27,6 +27,17 @@ public class User {
     private String phone ;
     private String email ;
 
+    /*
+    +Id:int
+    +Fullname:string
+    +Username:string
+    +Password:string
+    +User_type:string
+    +Picture:byte
+    +Phone:string
+    +Email:string
+    */
+    
     public User() {
     }
 

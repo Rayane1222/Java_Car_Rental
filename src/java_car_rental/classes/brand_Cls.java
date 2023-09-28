@@ -62,7 +62,15 @@ public class brand_Cls {
         this.logo = logo;
     }
     
-    
+    /*
+    +addBrand():void
+    +editBrand():void
+    +removeBrand():void
+    +getData():ResultSet
+    +brandsList():ArrayList
+    +getBrandById():Brand
+    +brandsHashMap():HashMap
+    */
     
     // create function to add, edit, remove 
     
